@@ -20,17 +20,32 @@ typedef vector<ll> vl;
 
 void Solve(){
     int n, m, k, l, d, r, ans = 0;
-    
+    cin >> n >> m;
+    l = 1;
+    d = 1;
+    r = n+1;
+    k = n;
+    while(k!=m){
+        k+=l; 
+        if(k == r){
+            l *= -1;
+            d *= -2;
+            r = n + d;
+        }
+        ans++;
+    }
+    cout << ans << endl;
 }
 
 
 int main(){
     fastio;
-    // freopen("input.txt", "r", stdin);
-    // freopen("output.txt", "w", stdout);
+    freopen("lostcow.in", "r", stdin);
+    freopen("lostcow.out", "w", stdout);
     int time = 1 ;
     //cin >> time ;
     while(time--)Solve();
     return 0;
 }
+
 
