@@ -18,24 +18,19 @@ typedef pair<ll,ll> pll;
 typedef vector<int> vi;
 typedef vector<ll> vl;
 
-void setIO(string s);
-
 void Solve(){
     int n, m, k, l, d, r, ans = 0;
-
+    
 }
 
 
 int main(){
     fastio;
-    //setIO()
+    // freopen("input.txt", "r", stdin);
+    // freopen("output.txt", "w", stdout);
     int time = 1 ;
     //cin >> time ;
     while(time--)Solve();
     return 0;
 }
 
-void setIO(string s){
-	freopen((s+".in").c_str(), "r", stdin);
-	freopen((s+".out").c_str(), "w", stdout);
-}
