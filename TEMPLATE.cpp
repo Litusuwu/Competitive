@@ -22,7 +22,7 @@ void setIO(string s);
 
 void Solve(){
     int n, m, k, l, d, r, ans = 0;
-
+    cin >> n;
 }
 
 
