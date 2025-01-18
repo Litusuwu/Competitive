@@ -14,48 +14,38 @@ typedef long double ld;
 typedef long long ll;
 typedef long long int li;
 typedef pair<int,int> pii;
-typedef pair<ll,ll> pll;©©©©
+typedef pair<ll,ll> pll;
 typedef vector<int> vi;
 typedef vector<ll> vl;
 
-vector<string> construct(int n){
-    if(n == 1){
-        return {"0", "1"}; 
-    }
-    vector<string>next = construct(n-1), act;
-    
-    
-    for(int i = 0 ; i < next.size(); i++){ 
-        act.push_back("1" + next[i]);
-    }
-    reverse(all(act));
-    for(int i = 0 ; i < next.size(); i++){
-        next[i] = "0" + next[i];
-    }
-    next.insert(next.end(), act.begin(), act.end());
-
-    return next;
-}
+void setIO(string s);
 
 void Solve(){
     int n, m, k, l, d, r, ans = 0;
-    vector<string>grey;
-    string str;
     cin >> n;
-    grey = construct(n);
-    for(auto it : grey){
-        cout << it << endl;
+    vector<vector<int>>shell{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
+    int v[3] = {0, 0, 0};
+    rep(i, n){
+        cin >> m >> k >> l;
+        swap(shell[0][m - 1], shell[0][k - 1]);
+        swap(shell[1][m - 1], shell[1][k - 1]);
+        swap(shell[2][m - 1], shell[2][k - 1]);
+        rep(d, 3)if(shell[d][l - 1] == 1) v[d]++;
     }
+    cout << max(v[0], max(v[1], v[2])) << endl;
 }
 
 
 int main(){
     fastio;
-    // freopen("input.txt", "r", stdin);
-    // freopen("output.txt", "w", stdout);
+    setIO("shell");
     int time = 1 ;
-    //cin >> time ;
+    // cin >> time ;
     while(time--)Solve();
     return 0;
 }
 
+void setIO(string s){
+	freopen((s+".in").c_str(), "r", stdin);
+	freopen((s+".out").c_str(), "w", stdout);
+}

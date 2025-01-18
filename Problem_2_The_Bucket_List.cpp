@@ -14,48 +14,42 @@ typedef long double ld;
 typedef long long ll;
 typedef long long int li;
 typedef pair<int,int> pii;
-typedef pair<ll,ll> pll;©©©©
+typedef pair<ll,ll> pll;
 typedef vector<int> vi;
 typedef vector<ll> vl;
 
-vector<string> construct(int n){
-    if(n == 1){
-        return {"0", "1"}; 
-    }
-    vector<string>next = construct(n-1), act;
-    
-    
-    for(int i = 0 ; i < next.size(); i++){ 
-        act.push_back("1" + next[i]);
-    }
-    reverse(all(act));
-    for(int i = 0 ; i < next.size(); i++){
-        next[i] = "0" + next[i];
-    }
-    next.insert(next.end(), act.begin(), act.end());
-
-    return next;
-}
+void setIO(string s);
 
 void Solve(){
     int n, m, k, l, d, r, ans = 0;
-    vector<string>grey;
-    string str;
     cin >> n;
-    grey = construct(n);
-    for(auto it : grey){
-        cout << it << endl;
+    vector<pair<pii, int>>vacas;
+    rep(i, n){
+        cin >> m >> l >> d;
+        vacas.push_back({{m,l}, d});
     }
+    sort(all(vacas));
+    rep(i, 1000){
+        int prevAns=0;
+        rep(j, n){
+            if(vacas[j].F.S > i && vacas[j].F.F <= i)prevAns+=vacas[j].S;
+        }
+        ans = max(prevAns, ans);
+    }
+    cout << ans << endl;
 }
 
 
 int main(){
     fastio;
-    // freopen("input.txt", "r", stdin);
-    // freopen("output.txt", "w", stdout);
+    setIO("blist");
     int time = 1 ;
     //cin >> time ;
     while(time--)Solve();
     return 0;
 }
 
+void setIO(string s){
+	freopen((s+".in").c_str(), "r", stdin);
+	freopen((s+".out").c_str(), "w", stdout);
+}
