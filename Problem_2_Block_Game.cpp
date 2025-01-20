@@ -26,11 +26,20 @@ void Solve(){
     string s1, s2;
     vector<int>v(26, 0);
     rep(i, n){
-        set<char>z;
+        vector<int>v1(26, 0), v2(26, 0), v3(26,0);
         cin >> s1 >> s2;
-        for(char x : s1)z.insert(x);
-        for(char x : s2)z.insert(x);
-        for(char x : z)v[x-'a']++;
+        for(char x : s1){
+            v2[x-'a']++;
+        }
+        for(char x : s2){
+            v1[x-'a']++;
+        }
+        rep(i, 26){
+            v3[i] = max(v1[i], v2[i]);
+        }
+        rep(i, 26){
+            v[i]+=v3[i];
+        }
     }
     for(int x : v){
         cout << x << endl;

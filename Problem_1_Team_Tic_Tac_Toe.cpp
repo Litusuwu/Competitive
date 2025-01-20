@@ -24,42 +24,97 @@ void Solve(){
     int n, m, k, l, d, r, ans = 0;
     int ans1 = 0 , ans2 = 0;
     string s[3];
+    set<char>rSet;
+    set<pair<char,char>> rSet2;
     cin >> s[0] >> s[1] >> s[2];
     rep(i, 3){
         if(s[i][0] == s[i][1] && s[i][1] == s[i][2]){
-            ans1++;
+            rSet.insert(s[i][0]);
         }
         if(s[0][i] == s[1][i] && s[1][i] == s[2][i]){
-            ans1++;
+            rSet.insert(s[0][i]);
         }
-        if(s[i][0] == s[i][1] && s[i][1] != s[i][2] || s[i][1] ==  s[i][2] && s[i][1] != s[i][0] || s[i][0] == s[i][2] && s[i][0] != s[i][1]){
-            ans2++;
+        if(s[i][0] == s[i][1] && s[i][1] != s[i][2] || s[i][1] ==  s[i][2] && s[i][1] != s[i][0] ||
+             s[i][0] == s[i][2] && s[i][0] != s[i][1]){
+            if(s[i][0] == s[i][1]){
+                rSet2.insert({s[i][0],s[i][2]});
+                rSet2.insert({s[i][2],s[i][0]});
+            }
+            else if(s[i][1] == s[i][2]){
+                rSet2.insert({s[i][0],s[i][2]});
+                rSet2.insert({s[i][2],s[i][0]});
+            }
+            else if(s[i][0] == s[i][2]){
+                rSet2.insert({s[i][0],s[i][1]});
+                rSet2.insert({s[i][1],s[i][0]});
+            }
         }
-        if(s[0][i] == s[1][i] && s[1][i] != s[2][i] || s[1][i] ==  s[2][i] && s[1][i] != s[0][i] || s[0][i] == s[2][i] && s[0][i] != s[1][i]){
-            ans2++;
+        if(s[0][i] == s[1][i] && s[1][i] != s[2][i] || s[1][i] ==  s[2][i] && s[1][i] != s[0][i] ||
+             s[0][i] == s[2][i] && s[0][i] != s[1][i]){
+
+            if(s[0][i] == s[1][i]){
+                rSet2.insert({s[2][i],s[1][i]});
+                rSet2.insert({s[1][i],s[2][i]});
+            }
+            else if(s[1][i] == s[2][i]){
+                rSet2.insert({s[1][i],s[0][i]});
+                rSet2.insert({s[0][i],s[1][i]});
+            }
+            else if(s[0][i] == s[2][i]){
+                rSet2.insert({s[0][i],s[1][i]});
+                rSet2.insert({s[1][i],s[0][i]});
+            }
         }
     }
     if(s[0][0] == s[1][1] && s[1][1] == s[2][2]){
-        ans1++;
+        rSet.insert(s[0][0]);
     }
     if(s[0][2] == s[1][1] && s[1][1] == s[2][0]){
-        ans1++;
+        rSet.insert(s[0][2]);
     }
-    if(s[0][0] == s[1][1] && s[1][1] != s[2][2] || s[0][0] == s[2][2] && s[1][1] != s[2][2] || s[2][2] == s[1][1] && s[1][1] != s[0][0] ){
-        ans2++;
+    if(s[0][0] == s[1][1] && s[1][1] != s[2][2] || s[0][0] == s[2][2] && s[1][1] != s[2][2] ||
+         s[2][2] == s[1][1] && s[1][1] != s[0][0] ){
+        if(s[0][0]==s[1][1]){
+            rSet2.insert({s[0][0],s[2][2]});
+            rSet2.insert({s[2][2],s[0][0]});
+        }
+        else if(s[0][0]==s[2][2]){
+            rSet2.insert({s[0][0],s[1][1]});
+            rSet2.insert({s[1][1],s[0][0]});
+        }
+        else if(s[1][1]==s[2][2]){
+            rSet2.insert({s[1][1],s[0][0]});
+            rSet2.insert({s[0][0],s[1][1]});
+        }
     }
-    if(s[0][2] == s[1][1] && s[1][1] != s[2][0] || s[2][0] == s[0][2] && s[1][1] != s[0][2] || s[2][0] == s[1][1] && s[1][1] != s[0][2] ){
-        ans2++;
+    if(s[0][2] == s[1][1] && s[1][1] != s[2][0] || s[2][0] == s[0][2] && s[1][1] != s[0][2] || 
+        s[2][0] == s[1][1] && s[1][1] != s[0][2] ){
+        if(s[0][2] == s[1][1]){
+            rSet2.insert({s[0][2],s[2][0]});
+            rSet2.insert({s[2][0],s[0][2]});
+        }
+        else if(s[0][2] == s[2][0]){
+            rSet2.insert({s[0][2],s[1][1]});
+            rSet2.insert({s[1][1],s[0][2]});
+        }
+        else if(s[1][1] == s[2][0]){
+            rSet2.insert({s[1][1],s[0][2]});
+            rSet2.insert({s[0][2],s[1][1]});
+        }
     }
     
     // cout << s[0];
-    cout << ans1 << endl << ans2 << endl;
+    cout << rSet.size() << endl << rSet2.size()/2 << endl;
+    // for(auto it : rSet2){
+    //     cout << it.F << " #" << it.S << endl;
+    // }
+    
 }
 
 
 int main(){
     fastio;
-    //setIO();
+    setIO("tttt");
     int time = 1 ;
     //cin >> time ;
     while(time--)Solve();

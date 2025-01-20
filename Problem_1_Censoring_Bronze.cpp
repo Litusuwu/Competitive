@@ -36,7 +36,7 @@ void Solve(){
 
 int main(){
     fastio;
-    //setIO();
+    setIO("censor");
     int time = 1 ;
     //cin >> time ;
     while(time--)Solve();
